@@ -2,6 +2,8 @@ package pagbe.example.RESTAPI.controller;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pagbe.example.RESTAPI.model.dto.CalculatorDTO;
 
@@ -37,10 +39,11 @@ public class CaculatorController {
         }
 
         @PostMapping("/olsMult")
-        public Double olsMult(@RequestBody @NotNull CalculatorDTO   calculatorDTO){
+        public ResponseEntity<Double>  olsMult(@RequestBody @NotNull CalculatorDTO   calculatorDTO){
             Double result;
             result = calculatorDTO.getNume1()*calculatorDTO.getNume2()*calculatorDTO.getNume3()*calculatorDTO.getNume4();
-            return result;
+            ResponseEntity<Double> responseEntity = new ResponseEntity<Double>(result, HttpStatus.CREATED);
+            return responseEntity;
 
         }
 
@@ -56,5 +59,6 @@ public class CaculatorController {
            }
 
         return result;
+
     }
 }
