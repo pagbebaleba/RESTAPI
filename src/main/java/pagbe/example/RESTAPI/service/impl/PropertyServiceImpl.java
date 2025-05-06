@@ -8,8 +8,11 @@ import pagbe.example.RESTAPI.model.dto.PropertyDTO;
 import pagbe.example.RESTAPI.repository.PropertyRepository;
 import pagbe.example.RESTAPI.service.PropertyService;
 
+import java.util.ArrayList;
+import java.util.List;
 
- @Service
+
+@Service
 public class PropertyServiceImpl implements PropertyService {
 
 
@@ -22,9 +25,26 @@ public class PropertyServiceImpl implements PropertyService {
     public PropertyDTO SavePropertyDTO(PropertyDTO propertyDTO){
 
         PropertyEntity propertyEntity =  propertyConverter.convertDTOToEntity(propertyDTO);
-        propertyRepository.save(propertyEntity);
+        propertyEntity =  propertyRepository.save(propertyEntity);
 
-        return  null;
+        propertyDTO = propertyConverter.convertEntityToDTO(propertyEntity);
+
+        return propertyDTO;
     }
+
+     public List<PropertyDTO> getAllPorperties() {
+
+         List<PropertyEntity> propertyEntityList = (List<PropertyEntity>) propertyRepository.findAll();
+
+         List<PropertyDTO> propertyDTOList = new ArrayList<>();
+
+         for (PropertyEntity propertyEntity : propertyEntityList){
+
+            PropertyDTO propertyDTO = propertyConverter.convertEntityToDTO(propertyEntity);
+
+            propertyDTOList.add(propertyDTO);
+         }
+         return propertyDTOList;
+     }
 
 }

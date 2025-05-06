@@ -10,7 +10,7 @@ import lombok.Setter;
 public class PropertyDTO {
 
 
-
+    private Long Id;
     private String title;
     private String description;
     private String ownerName;
