@@ -101,4 +101,10 @@ public class PropertyServiceImpl implements PropertyService {
         }
         return dto;
     }
+
+
+    @Override
+    public void deleteProperty(Long propertyId) {
+        propertyRepository.deleteById(propertyId);
+    }
 }

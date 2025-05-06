@@ -68,4 +68,14 @@ public class PropertyController {
         return responseEntity;
     }
 
+
+    @DeleteMapping("/properties/{propertyID}")
+    public ResponseEntity<Void> deletProperty(@PathVariable Long propertyID) {
+
+        propertyService.deleteProperty(propertyID);
+        //ResponseEntity<Void> responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    }
+
 }
