@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/properties")
+@RequestMapping("/api/v1")
 public class PropertyController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class PropertyController {
         return "Hello Anton comment tu vas ? ";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/properties")
     public ResponseEntity<PropertyDTO> saveProperties(@RequestBody PropertyDTO propertyDTO) {
         propertyDTO = propertyService.SavePropertyDTO(propertyDTO);
         System.out.println(propertyDTO);
@@ -40,5 +40,32 @@ public class PropertyController {
         return responseEntity;
     }
 
+
+    @PutMapping("/properties/{propertyID}")
+    public ResponseEntity<PropertyDTO> updatePropertyDescription(@RequestBody PropertyDTO propertyDTO, @PathVariable Long propertyID) {
+
+        propertyDTO = propertyService.updateProperty(propertyDTO, propertyID );
+
+        ResponseEntity<PropertyDTO> responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.CREATED);
+        return responseEntity;
+    }
+
+    @PatchMapping("/properties/update-description/{propertyID}")
+    public ResponseEntity<PropertyDTO> updateDescription(@RequestBody PropertyDTO propertyDTO, @PathVariable Long propertyID) {
+
+        propertyDTO = propertyService.updateDescription(propertyDTO, propertyID );
+
+        ResponseEntity<PropertyDTO> responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    @PatchMapping("/properties/update-price/{propertyID}")
+    public ResponseEntity<PropertyDTO> updatePrice(@RequestBody PropertyDTO propertyDTO, @PathVariable Long propertyID) {
+
+        propertyDTO = propertyService.updatePrice(propertyDTO, propertyID );
+
+        ResponseEntity<PropertyDTO> responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.OK);
+        return responseEntity;
+    }
 
 }
